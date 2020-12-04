@@ -114,7 +114,7 @@ int main(void) {
 		FILE *fp = fopen(filename, "rb");
 		if(fp == NULL || access(filename, F_OK) == -1){ //SENDING ERROR PACKET - FILE NOT FOUND
 			fprintf(stderr,"SERVER: file '%s' does not exist, sending error packet\n", filename);
-			char *e_msg = make_err("02", "ERROR_FILE_NOT_FOUND");
+			char *e_msg = make_err("01", "ERROR_FILE_NOT_FOUND");
 			printf("%s\n", e_msg);
 			sendto(sockfd, e_msg, strlen(e_msg), 0, (struct sockaddr *)&their_addr, addr_len);
 			exit(1);
@@ -207,7 +207,7 @@ int main(void) {
 		if(fp == NULL || access(filename, W_OK) == -1) { 
 			//SENDING ERROR PACKET - ACCESS DENIED
 			fprintf(stderr,"SERVER: file %s access denied, sending error packet\n", filename);
-			char *e_msg = make_err("05", "ERROR_ACCESS_DENIED");
+			char *e_msg = make_err("02", "ERROR_ACCESS_DENIED");
 			sendto(sockfd, e_msg, strlen(e_msg), 0, (struct sockaddr *)&their_addr, addr_len);
 			exit(1);
 		}
